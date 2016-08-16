@@ -2,7 +2,7 @@
 - hosts: localhost
 
   vars:
-    do_token: 2d5e0988575e6f8ce07217cb2dd9c6927d8ce9a24acb3da8e940b5cc0f19d56a
+    do_token:{{ lookup('file', '~/do_token.txt') }}
     droplets:
     - sheep1
 
