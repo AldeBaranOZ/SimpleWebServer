@@ -1,0 +1,2 @@
+[sheep]
+sheep1 ansible_ssh_host=188.166.226.236 ansible_ssh_user=root
