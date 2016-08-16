@@ -2,9 +2,10 @@
 - hosts: localhost
 
   vars:
-    do_token:{{ lookup('file', '~/do_token.txt') }}
     droplets:
     - sheep1
+  vars_files:
+    - /root/do_token.txt
 
   tasks:
 
