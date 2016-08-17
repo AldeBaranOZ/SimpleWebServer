@@ -4,6 +4,7 @@
   vars:
     droplets:
     - sheep1
+    - sheep2
   vars_files:
     - /root/do_token.txt
 
@@ -39,10 +40,7 @@
     with_items: droplets
     register: droplet_details
 
-#  - debug: msg="IP is {{ item.droplet.ip_address }}"
-#    with_items: droplet_details.results
+  - debug: msg="IP is {{ item.droplet.ip_address }}"
+    with_items: droplet_details.results
 
-  - name: write seeds to config
-    template: >
-       src=templates/seeds.j2 
-       dest=seeds1
+  - name: register seeds
