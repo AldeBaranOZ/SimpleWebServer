@@ -3,7 +3,8 @@
 
   vars:
     droplets:
-    - sheep1
+    - seed1
+    - seed2
   vars_files:
     - /root/do_token.txt
 
@@ -45,4 +46,5 @@
   - name: write seeds to config
     template: >
        src=templates/seeds.j2 
-       dest=seeds1
+       dest="/root/git/ansible-do-api/seeds/{{ item.droplet.name }}"
+    with_items: droplet_details.results

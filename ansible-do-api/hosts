@@ -1,2 +1,5 @@
 [sheep]
 sheep1 ansible_ssh_host=188.166.190.124 ansible_ssh_user=root
+
+[seeds]
+@/root/git/ansible-do-api/seeds 

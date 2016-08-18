@@ -1,0 +1,2 @@
+[seeds]
+seed2 ansible_ssh_host=188.166.254.79 ansible_ssh_user=root
