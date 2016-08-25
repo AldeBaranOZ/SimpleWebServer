@@ -1,0 +1,49 @@
+---
+- hosts: localhost
+
+  vars:
+    droplets:
+    - zuul
+  vars_files:
+    - /root/do_token.txt
+
+  tasks:
+
+  - name: ensure ssh key exists
+    user: >
+      name={{ ansible_user_id }}
+      generate_ssh_key=yes
+      ssh_key_file=.ssh/id_rsa
+
+  - name: ensure key exists at DigitalOcean
+    digital_ocean: >
+      state=present
+      command=ssh
+      name=my_ssh_key
+      ssh_pub_key={{ lookup('file', '~/.ssh/id_rsa.pub') }}
+      api_token={{ do_token }}
+    register: my_ssh_key
+
+
+  - name: ensure droplets exist
+    digital_ocean: >
+      state=present
+      command=droplet
+      name={{ item }}
+      unique_name=yes
+      size_id=512mb
+      region_id=sgp1
+      image_id=ubuntu-16-04-x64
+      ssh_key_ids={{ my_ssh_key.ssh_key.id }}
+      api_token={{ do_token }}
+    with_items: droplets
+    register: droplet_details
+
+#  - debug: msg="IP is {{ item.droplet.ip_address }}"
+#    with_items: droplet_details.results
+
+  - name: write seeds to config
+    template: >
+       src=templates/gws.j2 
+       dest=/root/git/sdn/hosts
+    with_items: droplet_details.results

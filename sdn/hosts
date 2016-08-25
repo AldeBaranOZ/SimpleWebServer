@@ -1,0 +1,2 @@
+[gws]
+zuul ansible_ssh_host=188.166.189.17 ansible_ssh_user=root
