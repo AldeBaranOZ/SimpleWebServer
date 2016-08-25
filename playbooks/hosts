@@ -1,2 +1,5 @@
 [sheep]
 sheep-1 ansible_ssh_host=128.199.93.228 ansible_ssh_user=root
+
+[iBallisticSquids]
+iBallisticSquid ansible_ssh_host=138.68.142.246 ansible_ssh_user=root

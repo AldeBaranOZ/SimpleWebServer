@@ -1,0 +1,15 @@
+- name: Configure Proxy Squid
+  hosts: iBallisticSquids
+  sudo: False
+  tasks:
+    - name: install squid
+      apt: name=squid update_cache=yes
+
+    - name: copy config files
+      copy: src=/etc/squid/squid.conf dest=/etc/squid/squid.conf
+    
+    - name: copy passwd file
+      copy: src=/etc/squid/squid_passwd dest=/etc/squid/squid_passwd
+
+    - name: restart nginx
+      service: name=squid state=restarted
